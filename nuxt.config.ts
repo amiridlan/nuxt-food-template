@@ -13,13 +13,17 @@ export default defineNuxtConfig({
     '@nuxtjs/seo',
   ],
 
-  css: ['~/assets/css/main.css'],
+  imports: {
+    dirs: [
+      'composables',
+      'composables/**',
+    ],
+  },
 
-  postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
-    },
+  tailwindcss: {
+    cssPath: '~/assets/css/main.css',
+    configPath: 'tailwind.config.ts',
+    exposeConfig: true,
   },
 
   app: {
@@ -29,12 +33,6 @@ export default defineNuxtConfig({
       viewport: 'width=device-width, initial-scale=1',
     },
     pageTransition: { name: 'page', mode: 'out-in' },
-  },
-
-  tailwindcss: {
-    cssPath: '~/assets/css/main.css',
-    configPath: 'tailwind.config.ts',
-    exposeConfig: true,
   },
 
   image: {
@@ -82,8 +80,17 @@ export default defineNuxtConfig({
   },
 
   typescript: {
-    strict: true,
     typeCheck: false,
+    strict: false,
+  },
+
+  vite: {
+    vue: {
+      script: {
+        defineModel: true,
+        propsDestructure: true,
+      },
+    },
   },
 
   nitro: {
